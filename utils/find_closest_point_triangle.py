@@ -17,7 +17,7 @@ psedocode:
 
 """
 
-class FindClosestPointMesh:
+class FindClosestPointTriangle:
     def __init__(self, point: Point3D, triangle: list[int], vertices: list[Point3D]):
         self.a = point.to_array()               # point
         self.triangle = triangle                # triangle is a list of 3 vertex indices
