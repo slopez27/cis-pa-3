@@ -21,13 +21,13 @@ class ReadMesh(ReadData):
     def __init__(self, filename: str) -> None:
         super().__init__(filename)  
         self.line_1 = self.lines[0].strip().split()  
-        self.N_verticies = int(self.line_1[0])   # num of verticies
+        self.N_vertices = int(self.line_1[0])   # num of verticies
         # find next N_verticies records
-        self.verticies = [list(map(float, line.strip().split())) for line in self.lines[1:self.N_verticies + 1]]
-        self.N_triangles = int(self.lines[self.N_verticies+1])   # num of triangles
+        self.vertices = [list(map(float, line.strip().split())) for line in self.lines[1:self.N_vertices + 1]]
+        self.N_triangles = int(self.lines[self.N_vertices+1])   # num of triangles
         # find next N_triangles records
-        self.triangles_indicies = [list(map(int, line.strip().split()))[:3] for line in self.lines[self.N_verticies+2:self.N_verticies + self.N_triangles + 2]]
-        self.neighbors_indicies = [list(map(int, line.strip().split()))[3:] for line in self.lines[self.N_verticies+2:self.N_verticies + self.N_triangles + 2]]
+        self.triangles_indices = [list(map(int, line.strip().split()))[:3] for line in self.lines[self.N_vertices+2:self.N_vertices + self.N_triangles + 2]]
+        self.neighbors_indices = [list(map(int, line.strip().split()))[3:] for line in self.lines[self.N_vertices+2:self.N_vertices + self.N_triangles + 2]]
 
 class ReadSampleReadings(ReadData):
     def __init__(self, filename: str) -> None:
