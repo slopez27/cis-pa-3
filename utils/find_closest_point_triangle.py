@@ -22,8 +22,10 @@ class FindClosestPointTriangle:
         self.a = point.to_array()               # point
         self.triangle = triangle                # triangle is a list of 3 vertex indices
         self.vertices = vertices                # list of all vertices
-
-        p, q, r = [vertices[i] for i in triangle]
+   
+        p = vertices[0]
+        q = vertices[1]
+        r = vertices[2]
 
         self.p = p.to_array()                 # first vertex point as an array
         self.q = q.to_array()                 # second vertex point as an array

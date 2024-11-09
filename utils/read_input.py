@@ -1,5 +1,6 @@
 from pathlib import Path
 import pandas as pd
+from point3d import Point3D
 
 class ReadData:
     def __init__(self, filename: str) -> None:
@@ -23,7 +24,11 @@ class ReadMesh(ReadData):
         self.line_1 = self.lines[0].strip().split()  
         self.N_vertices = int(self.line_1[0])   # num of verticies
         # find next N_verticies records
-        self.vertices = [list(map(float, line.strip().split())) for line in self.lines[1:self.N_vertices + 1]]
+        vertices = [list(map(float, line.strip().split())) for line in self.lines[1:self.N_vertices + 1]]
+        self.vertices = []
+        for vertex in vertices:
+            self.vertices.append(Point3D(vertex[0], vertex[1], vertex[2]))
+
         self.N_triangles = int(self.lines[self.N_vertices+1])   # num of triangles
         # find next N_triangles records
         self.triangles_indices = [list(map(int, line.strip().split()))[:3] for line in self.lines[self.N_vertices+2:self.N_vertices + self.N_triangles + 2]]
