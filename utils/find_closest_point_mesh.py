@@ -29,5 +29,3 @@ class FindClosestPointMesh:
 if __name__=="__main__":
     # filename = 'Problem3MeshFile.sur'
     pass
-
-
