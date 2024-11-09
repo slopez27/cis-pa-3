@@ -19,11 +19,9 @@ class FindClosestPointMesh:
 
     def iterate(self):
         for point in self.points:
-            
+            pass
 
 
 if __name__=="__main__":
     # filename = 'Problem3MeshFile.sur'
     pass
-
-
