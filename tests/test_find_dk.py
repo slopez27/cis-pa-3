@@ -21,7 +21,7 @@ class TestFindDk(unittest.TestCase):
         a_tip = [0.5, 0.5, 0.5]
         dk_calculator = find_dk(a_coords, b_coords, a_tip)
         print(dk_calculator.compute_dk())
-        self.assertEqual(dk_calculator.compute_dk(),[[-1.4, 0.6, 2.6],[-1.4, 0.6, 2.6],[-1.4, 0.6, 2.6]])
+        self.assertTrue(np.allclose(dk_calculator.compute_dk(),[[-1.4, 0.6, 2.6],[-1.4, 0.6, 2.6],[-1.4, 0.6, 2.6]]))
         print("Passed test_find)dk!")
 
 if __name__ == "__main__":
