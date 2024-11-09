@@ -3,7 +3,7 @@ import numpy as np
 from scipy.spatial.transform import Rotation as R
 import sys
 sys.path.append('../utils/')
-from point_point_registration import Registration
+from point_cloud_registration import Registration
 from frame import Frame
 
 class TestRegistration(unittest.TestCase):
