@@ -8,13 +8,8 @@ class FindClosestPointMesh:
     def __init__(self, filename, points: list[Point3D]):
         read_mesh_file = ReadMesh(filename)
 
-        N_vertices = read_mesh_file.N_vertices
         self.vertices = read_mesh_file.vertices
-        N_triangles = read_mesh_file.N_triangles
-
         self.triangles_indices = read_mesh_file.triangles_indices
-        neighbors_indices = read_mesh_file.neighbors_indices
-
         self.points = points
 
     def iterate(self):
