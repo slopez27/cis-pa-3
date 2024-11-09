@@ -1,5 +1,5 @@
 import sys
-sys.path.append('utils/')
+sys.path.append('../utils/')
 from point3d import Point3D
 from find_closest_point_triangle import FindClosestPointTriangle
 
@@ -22,7 +22,6 @@ class TestClosestPointMeshBody(unittest.TestCase):
 
         closest_point = find.check_barycentric_coordinates()
         self.assertTrue(np.allclose(closest_point, point_in_triangle.to_array()))
-        print(closest_point)
         print("Passed test_point_inside_triangle!")
 
     def test_point_outside_triangle(self):
