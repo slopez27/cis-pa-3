@@ -29,13 +29,13 @@ find_closest_point_mesh.py
 * applies brute force method
 
 find_dk.py
-* does point cloud to point cloud registration and transformation to caclulate d_k
+* does point cloud - point cloud registration and transformation to caclulate d_k
 
 point3d.py
 * class representing a point
 
 sample_points.py
-* 
+* calculate s_k
 
 output_pa3.py
-* 
+* format data and write to files

@@ -17,7 +17,7 @@ class find_dk:
     def transform(self, source_points, target_points):
         """
         Calculate the rigid body transformation from source to target points.
-        Uses Singular Value Decomposition (SVD) for point cloud registration.
+        Uses Singular Value Decomposition (SVD) for point cloud - point cloud registration.
         Args: 
             source_points (numpy array): shape (N, 3)
             target_points (numpy array): shape (N, 3)
