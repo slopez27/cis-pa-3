@@ -8,7 +8,7 @@ from pathlib import Path
 
 
 def main(name: str, X: str, Y: str):
-    filename_mesh = Path(f"../data/Problem{X}MeshFile.sur")
+    filename_mesh = Path(f"/data/Problem{X}MeshFile.sur")
     filename_sample_readings = Path(f"../data/{name}-SampleReadingsTest.txt")
     filename_body = Path(f"../data/Problem{X}-Body{Y}.txt")
 
