@@ -2,19 +2,17 @@ from frame import Frame
 from point3d import Point3D
 from read_input import ReadMesh, ReadSampleReadings, ReadBody
 from find_dk import find_dk
-from find_closest_point_mesh import FindClosestPointMesh
-from find_closest_point_triangle import FindClosestPointTriangle
 from sample_points import SamplePoints
 from output_pa3 import output
+from pathlib import Path
 
 
 def main(name: str, X: str, Y: str):
-    filename_mesh = f"Problem{X}MeshFile"
-    filename_sample_readings = f"{name}-SampleReadings.txt"
-    filename_body = f"Problem{X}-Body{Y}"
+    filename_mesh = Path(f"../data/Problem{X}MeshFile")
+    filename_sample_readings = Path(f"../data/{name}-SampleReadingsTest.txt")
+    filename_body = Path(f"../data/Problem{X}-Body{Y}")
 
     sample_readings = ReadSampleReadings(filename_sample_readings)
-    mesh = ReadMesh(filename_mesh)
     body = ReadBody(filename_body)
 
     a_coords = sample_readings.A_coords
