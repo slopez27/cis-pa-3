@@ -14,7 +14,7 @@ class output:
         self.N_samps = N_samps
         self.name = name+"-Output.txt"
         self.d_k = d_k
-        self.s_k = d_k
+        self.s_k = s_k
     def write_to_file(self):
         file_path = Path(f"../outputs/{self.name}")
         with open(file_path, "w") as fp:
@@ -25,10 +25,3 @@ class output:
                 d_k = str(self.d_k[i]).translate(remove)
                 s_k = str(self.s_k[i]).translate(remove)
                 fp.write(d_k + "\t" + s_k + "\t" + str(mag_diff)+"\n")
-
-N_samps = 2
-letter = 'pa3-a'
-d_k = [[1,2,3],[4,5,6]]
-s_k = [[0,0,0],[0,0,0]]
-test = output(N_samps, letter, d_k, s_k)
-test.write_to_file()
