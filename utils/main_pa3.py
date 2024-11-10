@@ -7,7 +7,7 @@ from output_pa3 import output
 from pathlib import Path
 
 
-def main(name: str, X: str, Y: str):
+def main(name: str, X: str):
     filename_mesh = Path(f"../data/Problem{X}MeshFile.sur")
     filename_sample_readings = Path(f"../data/{name}-SampleReadingsTest.txt")
     filename_body_a = Path(f"../data/Problem{X}-BodyA.txt")
@@ -47,7 +47,6 @@ def main(name: str, X: str, Y: str):
     output(n_samples, name, d_k, c_k).write_to_file()
 
 if __name__ == "__main__":
-    name = "PA3-A-Debug"
+    name = "PA3-C-Debug"
     X = '3'
-    Y = 'A'
-    main(name, X, Y)
+    main(name, X)
