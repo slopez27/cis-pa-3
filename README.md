@@ -9,7 +9,7 @@ Instructions:
 * Use Python 3.12.6
 * 
 
-main.py
+main_pa3.py
 * This is where the main of our program is.
 * Takes input arguments:
   *  data_dir(str): where the data is
