@@ -1,5 +1,4 @@
 import numpy as np
-from frame import Frame
 from find_closest_point_mesh import FindClosestPointMesh
 
 class SamplePoints:
