@@ -18,10 +18,17 @@ class output:
     def write_to_file(self):
         file_path = Path(f"../outputs/{self.name}")
         with open(file_path, "w") as fp:
-            fp.write(str(self.N_samps)+" "+self.name+"\n")
+            # Write the header line
+            fp.write(f"{self.N_samps} {self.name}\n")
+
+            # Write each sample frame
             for i in range(self.N_samps):
-                mag_diff = np.linalg.norm(np.subtract(self.d_k[i],self.s_k[i]))
-                remove = str.maketrans("","",'[],')
-                d_k = str(self.d_k[i]).translate(remove)
-                s_k = str(self.s_k[i]).translate(remove)
-                fp.write(d_k + "\t" + s_k + "\t" + str(mag_diff)+"\n")
+                mag_diff = np.linalg.norm(np.subtract(self.d_k[i], self.s_k[i]))
+                
+                # Format d_k and s_k to 2 decimal places
+                d_k_str = " ".join(f"{value:.2f}\t" for value in self.d_k[i])
+                s_k_str = " ".join(f"{value:.2f}\t" for value in self.s_k[i])
+                
+                # Write the formatted values
+                fp.write(f"{d_k_str}\t\t{s_k_str}\t{mag_diff:.2f}\n")
+

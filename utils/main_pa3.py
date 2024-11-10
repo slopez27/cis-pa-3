@@ -21,14 +21,17 @@ def main(name: str, X: str, Y: str):
     s_k = []
     a_tip = body_a.tip
     for i in range(n_samples):
-        a_coords = sample_readings.A_coords[i]
-        b_coords = sample_readings.B_coords[i]
-        solve_for_d_k = find_dk(a_coords, b_coords, a_tip)
+        a_tracker = sample_readings.A_coords[i]
+        b_tracker = sample_readings.B_coords[i]
+        solve_for_d_k = find_dk(body_a.markers, body_b.markers,a_tracker,b_tracker, a_tip)
         print(solve_for_d_k.compute_dk())
         d_k.append(solve_for_d_k.compute_dk())
-        sample_points = SamplePoints(d_k[i])
-        c_k.append(sample_points.solve_for_c_k())
-        s_k.append(sample_points.solve_for_s_k(filename_mesh))
+        # sample_points = SamplePoints(d_k[i])
+        # c_k.append(sample_points.solve_for_c_k())
+        # s_k.append(sample_points.solve_for_s_k(filename_mesh))
+    sample_points = SamplePoints(d_k)
+    c_k = sample_points.solve_for_c_k()
+    s_k = sample_points.solve_for_s_k(filename_mesh)
     # a_tip = body_a.tip
     # print(a_coords)
     # print(b_coords)

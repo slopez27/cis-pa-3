@@ -2,7 +2,7 @@
 import numpy as np
 
 class find_dk:
-    def __init__(self, a_coords, b_coords, a_tip):
+    def __init__(self, a_body, b_body, a_tracker, b_tracker, a_tip):
         """
         Initialize with arrays of coordinates and the tip position of A.
         Args:
@@ -10,8 +10,10 @@ class find_dk:
             b_coords (numpy array): shape (N, 3) for LED marker positions in frame B.
             a_tip (numpy array): shape (3) for the tip position in frame A.
         """
-        self.a_coords = np.array(a_coords)
-        self.b_coords = np.array(b_coords)
+        self.a_body = np.array(a_body)
+        self.b_body = np.array(b_body)
+        self.a_tracker = np.array(a_tracker)
+        self.b_tracker = np.array(b_tracker)
         self.a_tip = np.array(a_tip)
 
     def transform(self, source_points, target_points):
@@ -49,6 +51,11 @@ class find_dk:
         Returns:
             numpy array of dk values for each sample
         """
-        R, t = self.transform(self.a_coords, self.b_coords)
-        dk_array = np.array([R @ self.a_tip + t ])
-        return dk_array
+        R_a, t_a = self.transform(self.a_tracker, self.a_body)
+        R_b, t_b = self.transform(self.b_tracker, self.b_body)
+        f_a_k_a_tip = R_a @ self.a_tip + t_a
+        R_b_inv = np.linalg.inv(R_b)
+        t_b_inv = -R_b_inv @ t_b
+        dk = - R_b_inv @ f_a_k_a_tip + t_b_inv # extra negitive??
+        # dk = np.array([R @ self.a_tip + t ])
+        return dk
