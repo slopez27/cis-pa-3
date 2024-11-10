@@ -25,11 +25,6 @@ class output:
                 d_k = str(self.d_k[i]).translate(remove)
                 s_k = str(self.s_k[i]).translate(remove)
                 fp.write(d_k + "\t" + s_k + "\t" + str(mag_diff)+"\n")
-                # fp.write("\t")
-                # fp.write(str(' '.join(self.s_k[i])))
-                # fp.write("\t")
-                # fp.write(str(mag_diff))
-                # fp.write("\n")
 
 N_samps = 2
 letter = 'pa3-a'
