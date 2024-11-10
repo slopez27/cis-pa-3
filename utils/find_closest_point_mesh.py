@@ -5,7 +5,7 @@ from read_input import ReadMesh, ReadBody
 # THIS IS THE PART GOING TO START WITH BRUTE FORCE
 
 class FindClosestPointMesh:
-    def __init__(self, filename, points: list[Point3D]):
+    def __init__(self, filename, points: list[list[float]]):
         read_mesh_file = ReadMesh(filename)
 
         self.vertices = read_mesh_file.vertices
@@ -15,6 +15,7 @@ class FindClosestPointMesh:
     def iterate(self):
         closest_points = []
         for point in self.points:
+            point = Point3D(point[0], point[1], point[2])
             find = FindClosestPointTriangle(point, self.triangles_indices, self.vertices)
             closest_points.append(find.check_barycentric_coordinates())
         return closest_points

@@ -19,6 +19,7 @@ psedocode:
 
 class FindClosestPointTriangle:
     def __init__(self, point: Point3D, triangle: list[int], vertices: list[Point3D]):
+        print("point:" +str(point))
         self.a = point.to_array()               # point
         self.triangle = triangle                # triangle is a list of 3 vertex indices
         self.vertices = vertices                # list of all vertices

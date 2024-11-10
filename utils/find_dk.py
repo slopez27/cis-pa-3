@@ -50,5 +50,5 @@ class find_dk:
             numpy array of dk values for each sample
         """
         R, t = self.transform(self.a_coords, self.b_coords)
-        dk_array = np.array([R @ self.a_tip + t for _ in range(len(self.a_coords))])
+        dk_array = np.array([R @ self.a_tip + t ])
         return dk_array
