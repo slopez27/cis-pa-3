@@ -33,16 +33,18 @@ class find_dk:
         source_centered = source_points - source_centroid
         target_centered = target_points - target_centroid
         # Compute covariance matrix
-        H = source_centered.T @ target_centered
+        H = np.dot(source_centered.T, target_centered)
         # SVD
         U, S, Vt = np.linalg.svd(H)
-        R = Vt.T @ U.T
+        R = np.dot(Vt.T, U.T)
         # Ensure a right-handed coordinate system
+        print(f"determinant of R is: {np.linalg.det(R)}")
         if np.linalg.det(R) < 0:
+            print("entering that det of r is less than 0!!!!!")
             Vt[-1, :] *= -1
-            R = Vt.T @ U.T
+            R = np.dot(Vt.T, U.T)
         # Translation
-        t = target_centroid - R @ source_centroid
+        t = target_centroid - np.dot(R, source_centroid)
         return R, t
 
     def compute_dk(self):
@@ -51,11 +53,14 @@ class find_dk:
         Returns:
             numpy array of dk values for each sample
         """
+        print(f"about to find R and t for A!!!!!!!")
         R_a, t_a = self.transform(self.a_tracker, self.a_body)
+        print(f"about to find R and t for B!!!!!")
         R_b, t_b = self.transform(self.b_tracker, self.b_body)
-        f_a_k_a_tip = R_a @ self.a_tip + t_a
+        
         R_b_inv = np.linalg.inv(R_b)
-        t_b_inv = -R_b_inv @ t_b
-        dk = - R_b_inv @ f_a_k_a_tip + t_b_inv # extra negitive??
+
+        dk = np.dot(R_b_inv, (R_a @ self.a_tip)) + np.dot(R_b_inv, t_a) - np.dot(R_b_inv, t_b)
+        # dk = R_b_inv @ f_a_k_a_tip + t_b_inv # extra negitive??
         # dk = np.array([R @ self.a_tip + t ])
         return dk

@@ -19,7 +19,6 @@ psedocode:
 
 class FindClosestPointTriangle:
     def __init__(self, point: Point3D, triangle: list[int], vertices: list[Point3D]):
-        print("point:" +str(point))
         self.a = point.to_array()               # point
         self.triangle = triangle                # triangle is a list of 3 vertex indices
         self.vertices = vertices                # list of all vertices
@@ -33,9 +32,9 @@ class FindClosestPointTriangle:
         self.r = r.to_array()                 # third vertex point as an array
 
     def compute_vectors(self):
-        qp = self.q - self.p
-        rp = self.r - self.p
-        ap = self.a - self.p
+        qp = np.subtract(self.p, self.q)
+        rp = np.subtract(self.p, self.r)
+        ap = np.subtract(self.p , self.a)
 
         return qp, rp, ap
     
@@ -64,23 +63,30 @@ class FindClosestPointTriangle:
         u, v = self.barycentric_coordinate()
 
         # check if projected points are in triangle
-        if u >= 0 and v >= 0 and u + v < 1:
+        if u >= 0 and v >= 0 and u + v <= 1:
+            print(f"projected {self.a} inside the triangle")
             return self.p + u * (self.q - self.p) + v * (self.r - self.p)   # inside the triangle
 
         # check if projected points are on triangle edges
         if v <= 0:          # edge pq
+            print(f"projected {self.a} closest to edge pq {np.subtract(self.p, self.q)}")
             return self.closest_point_on_segment(self.p, self.q)
         
         if u <= 0:          # edge pr
+            print(f"projected {self.a} closest to edge pr {np.subtract(self.p, self.r)}")
             return self.closest_point_on_segment(self.p, self.r)
         
         if u + v >= 1:      # edge qr
+            print(f"projected {self.a} closest to edge qr {np.subtract(self.q, self.r)}")
             return self.closest_point_on_segment(self.q, self.r)
+        
+        print("DID NOT MAKE IT INSIDE ANY")
 
     def closest_point_on_segment(self, x1, x2):
-        X = x2 - x1
+        X = np.subtract(x2, x1)
         t = np.dot(self.a - x1, X) / np.dot(X, X)
         t = max(0, min(1,t))
+        print(f"result of closest_point_on_segment: {x1 + t * X}")
         return x1 + t * X
 
         

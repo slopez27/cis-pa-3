@@ -23,7 +23,7 @@ def main(name: str, X: str):
     for i in range(n_samples):
         a_tracker = sample_readings.A_coords[i]
         b_tracker = sample_readings.B_coords[i]
-        solve_for_d_k = find_dk(body_a.markers, body_b.markers,a_tracker,b_tracker, a_tip)
+        solve_for_d_k = find_dk(a_tracker, b_tracker, body_a.markers, body_b.markers, a_tip)
         print(solve_for_d_k.compute_dk())
         d_k.append(solve_for_d_k.compute_dk())
         # sample_points = SamplePoints(d_k[i])
@@ -44,9 +44,9 @@ def main(name: str, X: str):
     # s_k = sample_points.solve_for_s_k(filename_mesh)
 
 
-    output(n_samples, name, d_k, c_k).write_to_file()
+    output(n_samples, name, d_k, s_k).write_to_file()
 
 if __name__ == "__main__":
-    name = "PA3-C-Debug"
+    name = "PA3-B-Debug"
     X = '3'
     main(name, X)
