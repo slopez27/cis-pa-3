@@ -85,7 +85,7 @@ class FindClosestPointTriangle:
     def closest_point_on_segment(self, x1, x2):
         X = np.subtract(x2, x1)
         t = np.dot(self.a - x1, X) / np.dot(X, X)
-        t = max(0, min(1,t))
+        t = max(0, min(t,1))
         print(f"result of closest_point_on_segment: {x1 + t * X}")
         return x1 + t * X
 
