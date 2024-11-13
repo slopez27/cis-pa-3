@@ -15,6 +15,7 @@ Instructions:
 * To automate comparison of the debug output3 files, in terminal run from utils folder:
       chmod +x compare.sh
       ./compare.sh
+* debug files must exist first 
 main_pa3.py
 * This is where the main of our program is.
 * Takes input arguments:
