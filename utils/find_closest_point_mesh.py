@@ -67,15 +67,15 @@ class FindClosestPointMesh:
             closest_point = None
             point = Point3D(point[0], point[1], point[2])
             point_coords = point.to_array()
-            for (triangle_indices, (lower, upper)) in zip(self.triangles_indices, bounding_boxes):
+            for (triangle, (lower, upper)) in zip(self.triangles_indices, bounding_boxes):
                 # Check if the point is within the expanded bounding box
                 if np.all(lower - bound <= point_coords) and np.all(point_coords <= upper + bound):
                     # Compute the closest point on the triangle
-                    p = self.vertices[triangle_indices[0]].to_array()
-                    q = self.vertices[triangle_indices[1]].to_array()
-                    r = self.vertices[triangle_indices[2]].to_array()
+                    p = self.vertices[triangle[0]].to_array()
+                    q = self.vertices[triangle[1]].to_array()
+                    r = self.vertices[triangle[2]].to_array()
 
-                    h = FindClosestPointTriangle(point, triangle_indices, self.vertices).check_barycentric_coordinates()
+                    h = FindClosestPointTriangle(point, triangle, self.vertices).check_barycentric_coordinates()
                     h_coords = np.array([h[0], h[1], h[2]])
                     distance = np.linalg.norm(h_coords - point_coords)
                     if distance < bound:
