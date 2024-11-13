@@ -30,5 +30,5 @@ class output:
                 s_k_str = " ".join(f"{value:.2f}\t" for value in self.s_k[i])
                 
                 # Write the formatted values
-                fp.write(f"{d_k_str}\t\t{s_k_str}\t{mag_diff:.2f}\n")
+                fp.write(f"{d_k_str}\t\t{s_k_str}\t{mag_diff:.3f}\n")
 

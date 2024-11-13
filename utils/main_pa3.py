@@ -1,3 +1,4 @@
+import sys
 from frame import Frame
 from point3d import Point3D
 from read_input import ReadSampleReadings, ReadBody
@@ -32,8 +33,7 @@ def main(name: str, X: str):
     s_k = sample_points.solve_for_s_k(filename_mesh)
 
     output(n_samples, name, d_k, s_k).write_to_file()
-
 if __name__ == "__main__":
-    name = "PA3-C-Debug"
-    X = '3'
-    main(name, X)
+    # name = "PA3-C-Debug"
+    # X = '3'
+    main(sys.argv[1], sys.argv[2])
