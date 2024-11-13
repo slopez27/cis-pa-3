@@ -49,25 +49,41 @@ class FindClosestPointMesh:
                     bound = magniture(h - a)
         
         """
+        bounding_boxes = []
+        for triangle_indices in self.triangles_indices:
+            p = self.vertices[triangle_indices[0]].to_array()
+            q = self.vertices[triangle_indices[1]].to_array()
+            r = self.vertices[triangle_indices[2]].to_array()
+
+            # Calculate the lower and upper bounds
+            lower = np.min([p, q, r], axis=0)
+            upper = np.max([p, q, r], axis=0)
+            bounding_boxes.append((lower, upper))
         start = time.time()
         closest_points = []
-
         for point in self.points:
-            min = np.inf
+            # Initialize minimum bound and closest point
+            bound = np.inf
+            closest_point = None
             point = Point3D(point[0], point[1], point[2])
+            point_coords = point.to_array()
+            for (triangle_indices, (lower, upper)) in zip(self.triangles_indices, bounding_boxes):
+                # Check if the point is within the expanded bounding box
+                if np.all(lower - bound <= point_coords) and np.all(point_coords <= upper + bound):
+                    # Compute the closest point on the triangle
+                    p = self.vertices[triangle_indices[0]].to_array()
+                    q = self.vertices[triangle_indices[1]].to_array()
+                    r = self.vertices[triangle_indices[2]].to_array()
 
-            for triangle in self.triangles_indices:
-                bound = np.inf
-                # TODO: define lower bounding box
-                # TODO: define upper bounding box
-
-                for i in range(len(self.triangles_indices)): # TODO: what is N supposed to be? number of triangles?
-                    h = FindClosestPointTriangle(point, triangle, self.vertices).check_barycentric_coordinates()
-                    
-                    if np.linalg.norm(h - point.to_array()) < bound:
-                        c = h
-                        bound = np.linalg.norm(h = point.to_array())
-        closest_points.append(c)
-                
+                    h = FindClosestPointTriangle(point, triangle_indices, self.vertices).check_barycentric_coordinates()
+                    h_coords = np.array([h[0], h[1], h[2]])
+                    distance = np.linalg.norm(h_coords - point_coords)
+                    if distance < bound:
+                        closest_point = h_coords
+                        bound = distance
+            closest_points.append(closest_point)
+        end = time.time()
+        print(f"Time for iterate_bounding_boxes: {end - start} seconds")
+        return closest_points
 if __name__=="__main__":
     pass

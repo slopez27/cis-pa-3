@@ -12,6 +12,6 @@ class SamplePoints:
     
     def solve_for_s_k(self, filename: str) -> list[list[float]]:
         find = FindClosestPointMesh(filename, self.solve_for_c_k())
-        s_k = find.iterate()                    # returns list of list of floats
+        s_k = find.iterate_bounding_boxes()                    # returns list of list of floats
         return s_k
     

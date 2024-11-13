@@ -31,4 +31,5 @@ class output:
                 
                 # Write the formatted values
                 fp.write(f"{d_k_str}\t\t{s_k_str}\t{mag_diff:.3f}\n")
+    
 
