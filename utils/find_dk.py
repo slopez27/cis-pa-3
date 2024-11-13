@@ -1,4 +1,3 @@
-#TODO: Diana solve this today :) 
 import numpy as np
 
 class find_dk:
