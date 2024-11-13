@@ -8,7 +8,6 @@ class SamplePoints:
 
 
     def solve_for_c_k(self):
-        print(f"d_k: {self.d_k}")
         return self.d_k
     
     def solve_for_s_k(self, filename: str) -> list[list[float]]:

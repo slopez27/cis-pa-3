@@ -38,9 +38,9 @@ class find_dk:
         U, S, Vt = np.linalg.svd(H)
         R = np.dot(Vt.T, U.T)
         # Ensure a right-handed coordinate system
-        print(f"determinant of R is: {np.linalg.det(R)}")
+        # print(f"determinant of R is: {np.linalg.det(R)}")
         if np.linalg.det(R) < 0:
-            print("entering that det of r is less than 0!!!!!")
+            # print("entering that det of r is less than 0!!!!!")
             Vt[-1, :] *= -1
             R = np.dot(Vt.T, U.T)
         # Translation
@@ -53,9 +53,9 @@ class find_dk:
         Returns:
             numpy array of dk values for each sample
         """
-        print(f"about to find R and t for A!!!!!!!")
+        # print(f"about to find R and t for A!!!!!!!")
         R_a, t_a = self.transform(self.a_tracker, self.a_body)
-        print(f"about to find R and t for B!!!!!")
+        # print(f"about to find R and t for B!!!!!")
         R_b, t_b = self.transform(self.b_tracker, self.b_body)
         
         R_b_inv = np.linalg.inv(R_b)

@@ -72,6 +72,7 @@ class TestClosestPointMeshBody(unittest.TestCase):
 
         print("Passed test_point_above_triangle!")
         
+        
 
 if __name__ == "__main__":
     unittest.main()

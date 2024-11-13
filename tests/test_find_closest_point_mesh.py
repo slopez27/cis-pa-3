@@ -31,7 +31,7 @@ class TestClosestPointMeshBody(unittest.TestCase):
         os.unlink(self.tempfile.name)
 
     def test_point_inside_triangle(self):
-        points = [self.point_inside]
+        points = [self.point_inside.to_array()]
         finder = FindClosestPointMesh(self.tempfile.name, points)
         closest_points = finder.iterate()
         
@@ -40,7 +40,7 @@ class TestClosestPointMeshBody(unittest.TestCase):
         print("Passed test_point_inside_triangle!")
 
     def test_point_on_edge(self):
-        points = [self.point_on_edge]
+        points = [self.point_on_edge.to_array()]
         finder = FindClosestPointMesh(self.tempfile.name, points)
         closest_points = finder.iterate()
         
@@ -49,7 +49,7 @@ class TestClosestPointMeshBody(unittest.TestCase):
         print("Passed test_point_on_edge!")
 
     def test_point_outside_near_triangle(self):
-        points = [self.point_outside]
+        points = [self.point_outside.to_array()]
         finder = FindClosestPointMesh(self.tempfile.name, points)
         closest_points = finder.iterate()
         
@@ -58,7 +58,7 @@ class TestClosestPointMeshBody(unittest.TestCase):
         print("Passed test_point_outside_near_triangle!")
 
     def test_point_above_triangle_plane(self):
-        points = [self.point_above]
+        points = [self.point_above.to_array()]
         finder = FindClosestPointMesh(self.tempfile.name, points)
         closest_points = finder.iterate()
         
@@ -66,6 +66,17 @@ class TestClosestPointMeshBody(unittest.TestCase):
         self.assertTrue(np.allclose(closest_points[0], expected_point))
         print("Passed test_point_above_triangle_plane!")
 
+    def test_multiple_points(self):
+        points = [self.point_above.to_array(), self.point_inside.to_array(), self.point_on_edge.to_array(), self.point_outside.to_array()]
+        finder = FindClosestPointMesh(self.tempfile.name, points)
+
+        closest_points = finder.iterate()
+
+        expected_points = [np.array([0.25, 0.25, 0]), np.array([0.25, 0.25, 0]), np.array([0.5, 0, 0]), np.array([1, 0, 0])]
+        self.assertTrue(np.allclose(closest_points, expected_points))
+        print("Passed test_multiple_points!")
+
 
 if __name__ == '__main__':
+
     unittest.main()
