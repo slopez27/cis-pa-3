@@ -50,10 +50,10 @@ class FindClosestPointMesh:
         
         """
         bounding_boxes = []
-        for triangle_indices in self.triangles_indices:
-            p = self.vertices[triangle_indices[0]].to_array()
-            q = self.vertices[triangle_indices[1]].to_array()
-            r = self.vertices[triangle_indices[2]].to_array()
+        for triangle in self.triangles_indices:
+            p = self.vertices[triangle[0]].to_array()
+            q = self.vertices[triangle[1]].to_array()
+            r = self.vertices[triangle[2]].to_array()
 
             # Calculate the lower and upper bounds
             lower = np.min([p, q, r], axis=0)
