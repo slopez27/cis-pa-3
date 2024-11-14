@@ -17,4 +17,3 @@ class Point3D:
     def distance(self, other: Point3D):
         return np.linalg.norm(self.to_array() - other.to_array())
     
-    # TODO: any other functions that we could use for both?

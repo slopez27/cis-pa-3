@@ -52,14 +52,10 @@ class find_dk:
         Returns:
             numpy array of dk values for each sample
         """
-        # print(f"about to find R and t for A!!!!!!!")
         R_a, t_a = self.transform(self.a_tracker, self.a_body)
-        # print(f"about to find R and t for B!!!!!")
         R_b, t_b = self.transform(self.b_tracker, self.b_body)
         
         R_b_inv = np.linalg.inv(R_b)
 
         dk = np.dot(R_b_inv, (R_a @ self.a_tip)) + np.dot(R_b_inv, t_a) - np.dot(R_b_inv, t_b)
-        # dk = R_b_inv @ f_a_k_a_tip + t_b_inv # extra negitive??
-        # dk = np.array([R @ self.a_tip + t ])
         return dk

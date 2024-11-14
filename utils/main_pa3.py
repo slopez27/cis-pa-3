@@ -34,9 +34,7 @@ def main(name: str, X: str):
 
     output(n_samples, name, d_k, s_k).write_to_file()
 if __name__ == "__main__":
-    # name = "PA3-C-Debug"
-    # X = '3'
     if(len(sys.argv)==3):
         main(sys.argv[1], sys.argv[2])
     else:
-        main("PA3-A-Debug", "3")
+        main("PA3-A-Debug", "3") #hardcode option

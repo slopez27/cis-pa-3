@@ -4,25 +4,24 @@ from read_input import ReadMesh
 import numpy as np
 import time
 
-# THIS IS THE PART GOING TO START WITH BRUTE FORCE... keeping track of runtime here!
-
 class FindClosestPointMesh:
     def __init__(self, filename, points: list[list[float]]):
         read_mesh_file = ReadMesh(filename)
-
         self.vertices = read_mesh_file.vertices
         self.triangles_indices = read_mesh_file.triangles_indices
         self.points = points
 
     def iterate(self):
+        """
+        brute force method
+        linear search  
+        """
         start = time.time()
         closest_points = []
-
         for point in self.points:  
             closest_point = None
             min = np.inf
             point = Point3D(point[0], point[1], point[2])
-
             for triangle in self.triangles_indices:
                 find = FindClosestPointTriangle(point, triangle, self.vertices).check_barycentric_coordinates()
 
@@ -30,7 +29,6 @@ class FindClosestPointMesh:
                 if distance < min:
                     closest_point = find
                     min = distance
-
             closest_points.append(closest_point)
         end = time.time()
         print(f"Time for iterate: {end - start} seconds")
@@ -38,7 +36,6 @@ class FindClosestPointMesh:
     
     def iterate_bounding_boxes(self):
         """
-        //triangle i has corners p, q, r
         bounding box lower is L_i = L_xi, L_yi, L_zi and upper is U_i = U_xi, U_yi, U_zi
         bound = infinity
         for i = 1 to N do
@@ -47,14 +44,12 @@ class FindClosestPointMesh:
                 if magnitude(h - a) < bound then
                     c = h
                     bound = magniture(h - a)
-        
         """
         bounding_boxes = []
         for triangle in self.triangles_indices:
             p = self.vertices[triangle[0]].to_array()
             q = self.vertices[triangle[1]].to_array()
             r = self.vertices[triangle[2]].to_array()
-
             # Calculate the lower and upper bounds
             lower = np.min([p, q, r], axis=0)
             upper = np.max([p, q, r], axis=0)
@@ -74,7 +69,6 @@ class FindClosestPointMesh:
                     p = self.vertices[triangle[0]].to_array()
                     q = self.vertices[triangle[1]].to_array()
                     r = self.vertices[triangle[2]].to_array()
-
                     h = FindClosestPointTriangle(point, triangle, self.vertices).check_barycentric_coordinates()
                     h_coords = np.array([h[0], h[1], h[2]])
                     distance = np.linalg.norm(h_coords - point_coords)

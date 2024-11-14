@@ -22,9 +22,6 @@ class Frame:
         out[:3, 3] = self.translation
         return out
 
-    # def __str__(self) -> str:
-    #     return np.array_str(np.array(self), precision=4, suppress_small=True)
-
     def __str__(self) -> str:
         rotation_str = np.array_str(self.rotation, precision=4, suppress_small=True)
         translation_str = np.array_str(self.translation, precision=4, suppress_small=True)

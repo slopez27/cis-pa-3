@@ -48,11 +48,8 @@ class FindClosestPointTriangle:
     def check_barycentric_coordinates(self):
         u, v = self.barycentric_coordinate()
 
-        # print(f"HI:  {self.p + u * (self.q - self.p) + v * (self.r - self.p)}")
-
         # check if projected points are in triangle
         if u >= 0 and v >= 0 and u + v <= 1:
-            # print(f"projected {self.a} inside the triangle")
             return self.p + u * (self.q - self.p) + v * (self.r - self.p)   # inside the triangle
         
         closest_to_edge_pq = self.closest_point_on_segment(self.p, self.q)
